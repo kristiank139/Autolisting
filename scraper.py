@@ -1,4 +1,6 @@
-# import module
+# Features to add: car location info
+
+# Import module
 from selenium import webdriver
 import undetected_chromedriver as uc
 from selenium.webdriver.chrome.options import Options
@@ -12,6 +14,10 @@ from email.mime.text import MIMEText
 # Json faili jaoks
 import json
 import os
+
+# From github repo secrets
+your_email = os.environ.get("GMAIL_USER")
+your_app_password = os.environ.get("GMAIL_PASSWORD")
 
 import re # Vajalik eriliste tähemärkide asendamiseks
 
@@ -47,8 +53,6 @@ def send_notification_email(cars_dict):
     # Gmail SMTP settings
     smtp_server = "smtp.gmail.com"
     smtp_port = 587
-    your_email = "kristiank139@gmail.com"
-    your_app_password = "cmaf yfso vfpq qnnh"  # Not your normal Gmail password
 
     # Send the email
     with smtplib.SMTP(smtp_server, smtp_port) as server:
