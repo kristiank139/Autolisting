@@ -79,7 +79,7 @@ else:
     seen_links = set()
 
 # Setup chrome webdriver
-driver = uc.Chrome(version_main=116, headless=True) # If it starts crashing again, just download chromium
+driver = uc.Chrome(headless=True) # If it starts crashing again, just download chromium
 print("Driver initialized")
 
 driver.get('https://www.auto24.ee/kasutatud/nimekiri.php?bn=2&a=100&aj=&f1=2014&g1=10000&g2=23000&l2=130000&ab%5B%5D=-1&ae=1&af=50&otsi=otsi')
