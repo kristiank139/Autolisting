@@ -13,13 +13,9 @@ from email.mime.text import MIMEText
 
 # Json faili jaoks
 import json
+
 import os
-
-# From github repo secrets
-your_email = os.environ.get("GMAIL_USER")
-your_app_password = os.environ.get("GMAIL_PASSWORD")
-
-import re # Vajalik eriliste tähemärkide asendamiseks
+import re
 
 def send_notification_email(cars_dict):
     # Create the email
@@ -53,6 +49,8 @@ def send_notification_email(cars_dict):
     # Gmail SMTP settings
     smtp_server = "smtp.gmail.com"
     smtp_port = 587
+    your_email = os.getenv("GMAIL_USER")
+    your_app_password = os.getenv("GMAIL_PASSWORD") 
 
     # Send the email
     with smtplib.SMTP(smtp_server, smtp_port) as server:
