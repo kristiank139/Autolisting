@@ -78,8 +78,14 @@ if os.path.exists("seen_links.json"):
 else:
     seen_links = set()
 
+options = uc.ChromeOptions()
+options.headless = True
+options.add_argument("--window-size=1920,1080")
+options.add_argument("--disable-blink-features=AutomationControlled")
+options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36")
+
 # Setup chrome webdriver
-driver = uc.Chrome(headless=True) # If it starts crashing again, just download chromium
+driver = uc.Chrome(options=options) # If it starts crashing again, just download chromium
 print("Driver initialized")
 
 driver.get('https://www.auto24.ee/kasutatud/nimekiri.php?bn=2&a=100&aj=&f1=2014&g1=10000&g2=23000&l2=130000&ab%5B%5D=-1&ae=1&af=50&otsi=otsi')
