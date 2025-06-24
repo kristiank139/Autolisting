@@ -1,26 +1,29 @@
-name: Run Python Script
+name: Run Autolisting Scraper
 
 on:
   schedule:
-    - cron: '0 8 * * *'  # Runs every day at 08:00 UTC
-  workflow_dispatch:     # Allows manual trigger via GitHub UI
+    - cron: "*/15 * * * *"  # runs every 15 minutes
+  workflow_dispatch:  # allows manual triggering
 
 jobs:
   run-script:
     runs-on: ubuntu-latest
 
+    env:
+      GMAIL_USER: ${{ secrets.GMAIL_USER }}
+      GMAIL_PASSWORD: ${{ secrets.GMAIL_PASSWORD }}
+
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+      - name: Checkout repo
+        uses: actions/checkout@v3
 
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.11'
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
 
-    - name: Install dependencies
-      run: |
-        pip install -r requirements.txt
+      - name: Install dependencies
+        run: pip install -r requirements.txt
 
-    - name: Run script
-      run: python main.py
+      - name: Run scraper
+        run: python scraper.py
