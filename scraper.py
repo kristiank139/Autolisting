@@ -19,7 +19,7 @@ import re
 
 def send_notification_email(cars_dict):
     # Create the email
-    msg = MIMEMultipart("alternatice")
+    msg = MIMEMultipart("alternative")
     msg["Subject"] = "Uued autod!"
     msg["From"] = "kristiank139@gmail.com"
     msg["To"] = "kristiankoivastik@gmail.com"
