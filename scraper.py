@@ -84,6 +84,8 @@ print("Driver initialized")
 
 driver.get('https://www.auto24.ee/kasutatud/nimekiri.php?bn=2&a=100&aj=&f1=2014&g1=10000&g2=23000&l2=130000&ab%5B%5D=-1&ae=1&af=50&otsi=otsi')
 
+print(driver.page_source)
+
 # Web page max loading time, to make sure all elements are loaded
 wait = WebDriverWait(driver, 15)
 wait.until(EC.presence_of_element_located((By.CLASS_NAME, "result-row")))
