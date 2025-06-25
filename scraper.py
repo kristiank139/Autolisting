@@ -21,10 +21,10 @@ def send_notification_email(cars_dict):
     # Create the email
     msg = MIMEMultipart("alternative")
     msg["Subject"] = "Uued autod!"
-    msg["From"] = "kristiank139@gmail.com"
-    msg["To"] = "kristiankoivastik@gmail.com"
+    msg["From"] = os.getenv("GMAIL_USER")
+    msg["To"] = os.getenv("GMAIL_RECIEVER")
 
-     # Construct HTML body
+    # Construct HTML body
     html_body = "<h2>Siin on uued lisatud autod:</h2><ul>"
     for car in cars_dict:
         html_body += f"""
