@@ -1,5 +1,3 @@
-# Features to add: car location info, scrap the repo secrets idea - instead find a new way to hide confidential info
-
 # Import module
 from selenium import webdriver
 import undetected_chromedriver as uc
@@ -88,7 +86,7 @@ options.add_argument("--disable-blink-features=AutomationControlled")
 options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36")
 
 # Setup chrome webdriver
-driver = uc.Chrome(options=options) # If it starts crashing again, just download chromium
+driver = uc.Chrome(options=options)
 print("Driver initialized")
 
 driver.get('https://www.auto24.ee/kasutatud/nimekiri.php?bn=2&a=100&aj=&f1=2014&g1=10000&g2=23000&l2=130000&ab%5B%5D=-1&ae=1&af=50&otsi=otsi')
@@ -140,8 +138,10 @@ for auto_element in autod_elements:
 # close the driver
 driver.quit()
 
-print(autod)
-send_notification_email(autod)
+if autod:
+    send_notification_email(autod)
+else:
+    print("Uusi autosi pole")
 
 with open("seen_links.json", "w") as f:
     json.dump(list(lingid), f)
