@@ -12,11 +12,10 @@ from dotenv import load_dotenv # Env keys
 
 # Json faili jaoks
 import json
-
 import os
 import re
 
-load_dotenv("keys.env") # Load variables from .env
+load_dotenv(".env") # Load variables from .env
 
 def send_notification_email(cars_dict):
     # Create the email
