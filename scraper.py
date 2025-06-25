@@ -1,4 +1,4 @@
-# Features to add: car location info
+# Features to add: car location info, scrap the repo secrets idea - instead find a new way to hide confidential info
 
 # Import module
 from selenium import webdriver
@@ -10,12 +10,15 @@ from selenium.webdriver.support import expected_conditions as EC
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
+from dotenv import load_dotenv # Env keys
 
 # Json faili jaoks
 import json
 
 import os
 import re
+
+load_dotenv("keys.env") # Load variables from .env
 
 def send_notification_email(cars_dict):
     # Create the email
@@ -50,7 +53,7 @@ def send_notification_email(cars_dict):
     smtp_server = "smtp.gmail.com"
     smtp_port = 587
     your_email = os.getenv("GMAIL_USER")
-    your_app_password = os.getenv("GMAIL_PASSWORD") 
+    your_app_password = os.getenv("GMAIL_PASSWORD")
 
     # Send the email
     with smtplib.SMTP(smtp_server, smtp_port) as server:
@@ -79,7 +82,7 @@ else:
     seen_links = set()
 
 options = uc.ChromeOptions()
-options.headless = True
+options.headless = False
 options.add_argument("--window-size=1920,1080")
 options.add_argument("--disable-blink-features=AutomationControlled")
 options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36")
@@ -89,8 +92,6 @@ driver = uc.Chrome(options=options) # If it starts crashing again, just download
 print("Driver initialized")
 
 driver.get('https://www.auto24.ee/kasutatud/nimekiri.php?bn=2&a=100&aj=&f1=2014&g1=10000&g2=23000&l2=130000&ab%5B%5D=-1&ae=1&af=50&otsi=otsi')
-
-print(driver.page_source)
 
 # Web page max loading time, to make sure all elements are loaded
 wait = WebDriverWait(driver, 15)
