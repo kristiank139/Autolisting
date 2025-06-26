@@ -13,27 +13,28 @@ import re
 
 load_dotenv(dotenv_path="/Users/krist/Documents/proge/Serious-projects/Autolisting/.env") # Load variables from .env
 
-def create_html_body_email(cars_dict):
-    html_body = "<h2>Siin on uued lisatud autod:</h2><ul>"
-    for car in cars_dict:
-        html_body += f"""
-        <li style="margin-bottom: 15px;">
-            <strong>{car['nimi']}</strong><br>
-            Aasta: {car['aasta']}<br>
-            Hind: {car['hind']}<br>
-            Läbisõit: {car['mileage']}<br>
-            Kütus: {car['kütus']}<br>
-            Käigukast: {car['kast']}<br>
-            Vedu: {car['vedu']}<br>
-            Keretüüp: {car['tüüp']}<br>
-            <a href="{car['link']}">View listing</a><br>
-            {'<img src="'+car["image_url"]+'" alt="Car image" style="width:300px;margin-top:5px;">' if 'image_url' in car else ''}
-        </li>
-        """
-
-    html_body += "</ul>"
-
-    return html_body
+# For emails
+#def create_html_body_email(cars_dict):
+#    html_body = "<h2>Siin on uued lisatud autod:</h2><ul>"
+#    for car in cars_dict:
+#        html_body += f"""
+#        <li style="margin-bottom: 15px;">
+#            <strong>{car['nimi']}</strong><br>
+#            Aasta: {car['aasta']}<br>
+#            Hind: {car['hind']}<br>
+#            Läbisõit: {car['mileage']}<br>
+#            Kütus: {car['kütus']}<br>
+#            Käigukast: {car['kast']}<br>
+#            Vedu: {car['vedu']}<br>
+#            Keretüüp: {car['tüüp']}<br>
+#            <a href="{car['link']}">View listing</a><br>
+#            {'<img src="'+car["image_url"]+'" alt="Car image" style="width:300px;margin-top:5px;">' if 'image_url' in car else ''}
+#        </li>
+#        """
+#
+#    html_body += "</ul>"
+#
+#    return html_body
 
 def create_html_body_telegram(car):
     html_body = (
@@ -52,30 +53,30 @@ def create_html_body_telegram(car):
 
 def send_telegram_messages(cars_dict):
     for car in cars_dict:
-        print(car)
         send_telegram_message(create_html_body_telegram(car))
 
-def send_notification_email(cars_dict):
-    # Create the email
-    msg = MIMEMultipart("alternative")
-    msg["Subject"] = "Uued autod!"
-    msg["From"] = os.getenv("GMAIL_USER")
-    msg["To"] = os.getenv("GMAIL_RECIEVER")
-
-    msg.attach(MIMEText(create_html_body_email(cars_dict), "html"))
-
-    # Gmail SMTP settings
-    smtp_server = "smtp.gmail.com"
-    smtp_port = 587
-    your_email = os.getenv("GMAIL_USER")
-    your_app_password = os.getenv("GMAIL_PASSWORD")
-
-    # Send the email
-    with smtplib.SMTP(smtp_server, smtp_port) as server:
-        server.starttls()  # Secure the connection
-        server.login(your_email, your_app_password)
-        server.send_message(msg)
-    print("Email sent successfully.")
+# For emails
+#def send_notification_email(cars_dict):
+#    # Create the email
+#    msg = MIMEMultipart("alternative")
+#    msg["Subject"] = "Uued autod!"
+#    msg["From"] = os.getenv("GMAIL_USER")
+#    msg["To"] = os.getenv("GMAIL_RECIEVER")
+#
+#    msg.attach(MIMEText(create_html_body_email(cars_dict), "html"))
+#
+#    # Gmail SMTP settings
+#    smtp_server = "smtp.gmail.com"
+#    smtp_port = 587
+#    your_email = os.getenv("GMAIL_USER")
+#    your_app_password = os.getenv("GMAIL_PASSWORD")
+#
+#    # Send the email
+#    with smtplib.SMTP(smtp_server, smtp_port) as server:
+#        server.starttls()  # Secure the connection
+#        server.login(your_email, your_app_password)
+#        server.send_message(msg)
+#    print("Email sent successfully.")
 
 def safe_find_text(parent, by, value, default = ""):
     try:
