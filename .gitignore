@@ -6,3 +6,5 @@ note.md
 open-note-on-10th-save.js
 .vscode
 __pycache__
+.gitignore
+.DS_Store
