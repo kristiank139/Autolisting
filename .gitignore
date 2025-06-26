@@ -1,3 +1,8 @@
 .env
 scraper.log
 venv
+note.md
+.savecount
+open-note-on-10th-save.js
+.vscode
+__pycache__
